@@ -15,8 +15,8 @@ export default function Home({ allPostsData }) {
             <section className={utilStyles.headingMd}>
                 <MainText>
                     Hello 👋 I'm <b>Jordan,</b> a front end engineer at{' '}
-                    <a href="httMainTexts://dutchie.com/home">dutchie</a>. I
-                    make code and sometimes <Link href="/art">art.</Link>
+                    <a href="https://dutchie.com/home">dutchie</a>. I make code
+                    and sometimes <Link href="/art">art.</Link>
                 </MainText>
             </section>
             {/* <section className={utilStyles.headingMd}>…</section> */}
