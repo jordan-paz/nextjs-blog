@@ -48,6 +48,11 @@ export const Anchor = styled.a`
     transparent 40%,
     transparent
   );
+  :hover {
+    cursor: pointer;
+    text-decoration: none;
+    background: rgba(90, 239, 78, 0.8);
+  }
 `;
 
 export const Subtext = styled.small`
