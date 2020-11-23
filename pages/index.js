@@ -1,9 +1,15 @@
 import Head from 'next/head';
 import Link from 'next/link';
 import Layout, { siteTitle } from '../components/layout';
-import utilStyles from '../styles/utils.module.css';
+import {
+  HeadingMd,
+  HeadingSm,
+  Section,
+  ListItem,
+  Subtext,
+  Anchor,
+} from '../styles/components';
 import { getSortedPostsData } from '../lib/posts';
-import { MainText } from '../components/typography';
 import Date from '../components/date';
 
 export default function Home({ allPostsData }) {
@@ -12,29 +18,33 @@ export default function Home({ allPostsData }) {
       <Head>
         <title>{siteTitle}</title>
       </Head>
-      <section className={utilStyles.headingMd}>
-        <MainText>
+      <Section m="20px 0">
+        <HeadingSm>
           Hello, World 👋 I'm <b>Jordan,</b> a front end engineer at{' '}
-          <a href="https://dutchie.com/home">dutchie</a>. I make code and{' '}
-          <Link href="/art">drawings.</Link>
-        </MainText>
-      </section>
-      <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
-        <h2 className={utilStyles.headingLg}>Blog</h2>
-        <ul className={utilStyles.list}>
+          <Anchor href="https://dutchie.com/home">dutchie</Anchor>. I live in
+          Bend, Oregon. I make code and{' '}
+          <Link href="/drawings">
+            <Anchor>drawings</Anchor>
+          </Link>
+        </HeadingSm>
+      </Section>
+      <Section mt="40px">
+        <HeadingMd>Blog</HeadingMd>
+        <ul>
           {allPostsData.map(({ id, date, title }) => (
-            <li className={utilStyles.listItem} key={id}>
+            <ListItem key={id}>
               <Link href={`/posts/${id}`}>
-                <a>{title}</a>
+                <HeadingSm>
+                  <Anchor>{title}</Anchor>
+                </HeadingSm>
               </Link>
-              <br />
-              <small className={utilStyles.lightText}>
+              <Subtext>
                 <Date dateString={date} />
-              </small>
-            </li>
+              </Subtext>
+            </ListItem>
           ))}
         </ul>
-      </section>
+      </Section>
     </Layout>
   );
 }

@@ -2,16 +2,16 @@ import _ from 'lodash';
 import Head from 'next/head';
 import styled from 'styled-components';
 
-import Layout, { siteTitle } from '../components/layout';
-import { MainText } from '../components/typography';
+import { HeadingLg } from '../styles/components';
+import Layout from '../components/layout';
 
-export default function Art() {
+export default function Drawings() {
   return (
     <Layout>
       <Head>
-        <title>Jordan Paz | Art</title>
+        <title>Jordan Paz | Drawings</title>
       </Head>
-      <h1>Drawings (coming soon)</h1>
+      <HeadingLg>Drawings</HeadingLg>
       <Grid>
         {_.times(15, () => (
           <ImageContainer>
@@ -25,11 +25,12 @@ export default function Art() {
 
 const Grid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(47%, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
+  grid-gap: 1rem;
   @media (min-width: 576px) {
     grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
+    grid-gap: 0.5rem;
   }
-  grid-gap: 0.5rem;
 `;
 
 const ImageContainer = styled.div`

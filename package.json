@@ -8,6 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@sanity/client": "^2.0.9",
     "date-fns": "^2.16.1",
     "gray-matter": "^4.0.2",
     "lodash": "^4.17.20",
@@ -17,7 +18,8 @@
     "remark": "^13.0.0",
     "remark-html": "^13.0.1",
     "styled-components": "^5.2.1",
-    "styled-components-breakpoint": "^3.0.0-preview.20"
+    "styled-components-breakpoint": "^3.0.0-preview.20",
+    "styled-system": "^5.1.5"
   },
   "devDependencies": {
     "prettier": "^2.2.0"
