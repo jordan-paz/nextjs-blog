@@ -21,7 +21,7 @@ export default function Home({ allPostsData }) {
       <Section m="20px 0">
         <HeadingSm>
           Hello, World 👋 I'm <b>Jordan,</b> a front end engineer at{' '}
-          <Anchor href="https://dutchie.com/home">dutchie</Anchor>. I live in
+          <Anchor href="https://dutchie.com/home">dutchie</Anchor>, living in
           Bend, Oregon. I make code and{' '}
           <Link href="/drawings">
             <Anchor>drawings</Anchor>
