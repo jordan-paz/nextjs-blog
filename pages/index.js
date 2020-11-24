@@ -24,7 +24,7 @@ export default function Home({ allPostsData }) {
           <Anchor href="https://dutchie.com/home">dutchie</Anchor>, living in
           Bend, Oregon. I make code and{' '}
           <Link href="/drawings">
-            <Anchor>drawings</Anchor>
+            <Anchor>drawings.</Anchor>
           </Link>
         </HeadingSm>
       </Section>
@@ -34,10 +34,9 @@ export default function Home({ allPostsData }) {
           {allPostsData.map(({ slug, publishedAt, title }) => (
             <ListItem key={slug}>
               <Link href={`/posts/${slug}`}>
-                <HeadingSm>
-                  <Anchor>{title}</Anchor>
-                </HeadingSm>
+                <Anchor fontSize="1.5rem">{title}</Anchor>
               </Link>
+              <br />
               <Subtext>
                 <Date dateString={publishedAt} />
               </Subtext>

@@ -2,7 +2,9 @@ import Head from 'next/head';
 import styled from 'styled-components';
 import { width, height } from 'styled-system';
 import { HeadingXL, HeadingMd, Anchor } from 'styles/components';
+import ThemeToggle from 'components/theme-toggle';
 import Link from 'next/link';
+import { compact } from 'lodash';
 
 const name = 'Jordan Paz';
 export const siteTitle = 'Jordan Paz';
@@ -10,6 +12,7 @@ export const siteTitle = 'Jordan Paz';
 export default function Layout({ children, home }) {
   return (
     <Container>
+      <ThemeToggle />
       <Head>
         <link rel="icon" href="/favicon.ico" />
         <meta

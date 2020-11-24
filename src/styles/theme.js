@@ -1,12 +1,16 @@
-export default {
+export const light = {
   colors: {
-    black: '#151117',
-    primary: '#8E2986',
+    body: '#FAFAFA',
+    text: '#151117',
+    toggleBorder: '#FFF',
+    background: '#363537',
   },
-  fonts: ['sans-serif', 'Roboto'],
-  fontSizes: {
-    small: '1em',
-    medium: '2em',
-    large: '3em',
+};
+export const dark = {
+  colors: {
+    body: '#151117',
+    text: '#FAFAFA',
+    toggleBorder: '#6B8096',
+    background: '#999',
   },
 };
