@@ -1,11 +1,8 @@
 import Head from 'next/head';
 import styled from 'styled-components';
 import { width, height } from 'styled-system';
-import styles from './layout.module.css';
-import utilStyles from '../styles/utils.module.css';
-import { HeadingXL, HeadingMd, Anchor } from '../styles/components';
+import { HeadingXL, HeadingMd, Anchor } from 'styles/components';
 import Link from 'next/link';
-import { system } from 'styled-system';
 
 const name = 'Jordan Paz';
 export const siteTitle = 'Jordan Paz';
@@ -28,7 +25,7 @@ export default function Layout({ children, home }) {
         <meta name="og:title" content={siteTitle} />
         <meta name="twitter:card" content="summary_large_image" />
       </Head>
-      <header className={styles.header}>
+      <HeaderContainer>
         {home ? (
           <>
             <CircleImage
@@ -53,26 +50,32 @@ export default function Layout({ children, home }) {
             </Link>
             <HeadingMd>
               <Link href="/">
-                <a className={utilStyles.colorInherit}>{name}</a>
+                <HeadingLink>{name}</HeadingLink>
               </Link>
             </HeadingMd>
           </>
         )}
-      </header>
+      </HeaderContainer>
       <main>{children}</main>
       {!home && (
-        <div className={styles.backToHome}>
+        <BackToHomeContainer>
           <Link href="/">
-            <a>← Back to home</a>
+            <Anchor>← Back to home</Anchor>
           </Link>
-        </div>
+        </BackToHomeContainer>
       )}
     </Container>
   );
 }
 
+const HeaderContainer = styled.header`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
 const Container = styled.div`
-  max-width: 46rem;
+  max-width: 36rem;
   padding: 0 1rem;
   margin: 3rem auto 6rem;
 `;
@@ -81,4 +84,15 @@ const CircleImage = styled.img`
   border-radius: 9999px;
   ${width}
   ${height}
+`;
+
+const BackToHomeContainer = styled.div`
+  margin: 3rem 0 0;
+`;
+
+const HeadingLink = styled.a`
+  color: ${({ theme }) => theme.colors.black};
+  :hover {
+    cursor: pointer;
+  }
 `;

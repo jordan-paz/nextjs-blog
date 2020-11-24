@@ -14,6 +14,7 @@ export const HeadingXL = styled.h1`
   margin: 1rem 0;
   ${baseTextStyles}
 `;
+
 export const HeadingLg = styled.h1`
   font-size: 2rem;
   line-height: 1.3;

@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import Link from 'next/link';
-import Layout, { siteTitle } from '../components/layout';
+import Layout, { siteTitle } from 'components/layout';
 import {
   HeadingMd,
   HeadingSm,
@@ -8,9 +8,9 @@ import {
   ListItem,
   Subtext,
   Anchor,
-} from '../styles/components';
-import { getSortedPostsData } from '../lib/posts';
-import Date from '../components/date';
+} from 'styles/components';
+import { getAllPosts } from 'lib/posts';
+import Date from 'components/date';
 
 export default function Home({ allPostsData }) {
   return (
@@ -28,18 +28,18 @@ export default function Home({ allPostsData }) {
           </Link>
         </HeadingSm>
       </Section>
-      <Section mt="40px">
+      <Section mt="60px">
         <HeadingMd>Blog</HeadingMd>
         <ul>
-          {allPostsData.map(({ id, date, title }) => (
-            <ListItem key={id}>
-              <Link href={`/posts/${id}`}>
+          {allPostsData.map(({ slug, publishedAt, title }) => (
+            <ListItem key={slug}>
+              <Link href={`/posts/${slug}`}>
                 <HeadingSm>
                   <Anchor>{title}</Anchor>
                 </HeadingSm>
               </Link>
               <Subtext>
-                <Date dateString={date} />
+                <Date dateString={publishedAt} />
               </Subtext>
             </ListItem>
           ))}
@@ -50,7 +50,7 @@ export default function Home({ allPostsData }) {
 }
 
 export async function getStaticProps() {
-  const allPostsData = getSortedPostsData();
+  const allPostsData = await getAllPosts();
   return {
     props: {
       allPostsData,

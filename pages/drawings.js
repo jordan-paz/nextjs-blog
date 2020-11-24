@@ -2,8 +2,8 @@ import _ from 'lodash';
 import Head from 'next/head';
 import styled from 'styled-components';
 
-import { HeadingLg } from '../styles/components';
-import Layout from '../components/layout';
+import { HeadingLg } from 'styles/components';
+import Layout from 'components/layout';
 
 export default function Drawings() {
   return (
