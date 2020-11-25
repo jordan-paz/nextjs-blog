@@ -31,6 +31,7 @@ export const HeadingSm = styled.h3`
 
 export const Anchor = styled.a`
   font-weight: bold;
+  cursor: pointer;
   background-image: linear-gradient(
     0deg,
     rgba(90, 239, 78, 0.4) 0,
@@ -39,8 +40,6 @@ export const Anchor = styled.a`
     transparent
   );
   :hover {
-    cursor: pointer;
-    text-decoration: none;
     background: rgba(90, 239, 78, 0.8);
   }
   ${typography}
@@ -50,7 +49,6 @@ export const Subtext = styled.small`
   color: #999;
 `;
 
-// Layout
 export const Section = styled.section`
   ${space}
 `;

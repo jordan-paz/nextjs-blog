@@ -8,8 +8,8 @@ export const light = {
 };
 export const dark = {
   colors: {
-    body: '#151117',
-    text: '#FAFAFA',
+    body: '#2B303B  ',
+    text: '#FFFFF3',
     toggleBorder: '#6B8096',
     background: '#999',
   },
