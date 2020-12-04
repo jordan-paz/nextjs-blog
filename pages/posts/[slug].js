@@ -1,20 +1,17 @@
-import Head from 'next/head';
 import _ from 'lodash';
 import BlockContent from '@sanity/block-content-to-react';
-import { getAllPostSlugs, getPost } from 'lib/posts.js';
 import client from 'sanity-client';
-import Layout from 'components/layout';
 import Date from 'components/date';
 import { HeadingLg, Subtext } from 'styles/components';
 
+import { initializeApollo } from 'lib/apolloClient';
+import { gql } from '@apollo/client';
+
 export default function Post({ postData }) {
-  const { title, publishedAt, body } = postData;
+  const { title, publishedAt, bodyRaw } = postData;
 
   return (
-    <Layout>
-      <Head>
-        <title>{title}</title>
-      </Head>
+    <>
       <article>
         <HeadingLg>{title}</HeadingLg>
         <div>
@@ -23,20 +20,33 @@ export default function Post({ postData }) {
           </Subtext>
         </div>
         <BlockContent
-          blocks={body}
+          blocks={bodyRaw}
           imageOptions={{ w: 320, h: 240, fit: 'max' }}
           {...client.config()}
         />
       </article>
-    </Layout>
+    </>
   );
 }
 
 export async function getStaticPaths() {
-  const slugs = await getAllPostSlugs();
-  const paths = _.map(slugs, (slug) => ({
-    params: { slug },
+  const apolloClient = initializeApollo();
+  const query = gql`
+    query {
+      allPost {
+        slug {
+          current
+        }
+      }
+    }
+  `;
+
+  const { data } = await apolloClient.query({ query });
+  const slugs = _.map(data.allPost, `slug`);
+  const paths = _.map(slugs, ({ current }) => ({
+    params: { slug: current },
   }));
+
   return {
     paths,
     fallback: false,
@@ -44,10 +54,27 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const postData = await getPost(params.slug);
+  const apolloClient = initializeApollo();
+  const query = gql`
+    query($slug: String!) {
+      postData: allPost(where: { slug: { current: { eq: $slug } } }) {
+        title
+        bodyRaw
+        publishedAt
+        slug {
+          current
+        }
+      }
+    }
+  `;
+  const { data } = await apolloClient.query({
+    query,
+    variables: { slug: params.slug },
+  });
+
   return {
     props: {
-      postData,
+      postData: data.postData[0],
     },
   };
 }

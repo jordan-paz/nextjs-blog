@@ -1,6 +1,5 @@
 import Head from 'next/head';
 import Link from 'next/link';
-import Layout, { siteTitle } from 'components/layout';
 import {
   HeadingMd,
   HeadingSm,
@@ -9,14 +8,17 @@ import {
   Subtext,
   Anchor,
 } from 'styles/components';
-import { getAllPosts } from 'lib/posts';
-import Date from 'components/date';
 
-export default function Home({ allPostsData }) {
+import Date from 'components/date';
+import { initializeApollo } from 'lib/apolloClient';
+import { gql } from '@apollo/client';
+
+export default function Home({ allPostData }) {
+  console.log(allPostData);
   return (
-    <Layout home>
+    <>
       <Head>
-        <title>{siteTitle}</title>
+        <title>Jordan Paz</title>
       </Head>
       <Section m="20px 0">
         <HeadingSm>
@@ -31,9 +33,9 @@ export default function Home({ allPostsData }) {
       <Section mt="60px">
         <HeadingMd>Blog</HeadingMd>
         <ul>
-          {allPostsData.map(({ slug, publishedAt, title }) => (
-            <ListItem key={slug}>
-              <Link href={`/posts/${slug}`}>
+          {allPostData.map(({ slug, publishedAt, title }) => (
+            <ListItem key={slug.current}>
+              <Link href={`/posts/${slug.current}`}>
                 <Anchor fontSize="1.5rem">{title}</Anchor>
               </Link>
               <br />
@@ -44,15 +46,28 @@ export default function Home({ allPostsData }) {
           ))}
         </ul>
       </Section>
-    </Layout>
+    </>
   );
 }
 
 export async function getStaticProps() {
-  const allPostsData = await getAllPosts();
+  const apolloClient = initializeApollo();
+  const query = gql`
+    query {
+      allPostData: allPost {
+        publishedAt
+        title
+        slug {
+          current
+        }
+      }
+    }
+  `;
+  const { data } = await apolloClient.query({ query });
+
   return {
     props: {
-      allPostsData,
+      allPostData: data.allPostData,
     },
   };
 }

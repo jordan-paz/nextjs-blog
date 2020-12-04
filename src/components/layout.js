@@ -1,15 +1,14 @@
 import Head from 'next/head';
 import styled from 'styled-components';
 import { width, height } from 'styled-system';
-import { HeadingXL, HeadingMd, Anchor } from 'styles/components';
+import { HeadingMd } from 'styles/components';
 import ThemeToggle from 'components/theme-toggle';
 import Link from 'next/link';
-import { compact } from 'lodash';
 
 const name = 'Jordan Paz';
 export const siteTitle = 'Jordan Paz';
 
-export default function Layout({ children, home }) {
+export default function Layout({ children }) {
   return (
     <Container>
       <ThemeToggle />
@@ -29,44 +28,32 @@ export default function Layout({ children, home }) {
         <meta name="twitter:card" content="summary_large_image" />
       </Head>
       <HeaderContainer>
-        {home ? (
-          <>
-            <CircleImage
-              width="9rem"
-              height="9rem"
-              src="/images/profile.jpg"
-              alt={name}
-            />
-            <HeadingXL>{name}</HeadingXL>
-          </>
-        ) : (
-          <>
+        <>
+          <Link href="/">
+            <a>
+              <CircleImage
+                width="7rem"
+                height="7rem"
+                src="/images/profile.jpg"
+                alt={name}
+              />
+            </a>
+          </Link>
+          <HeadingMd>
             <Link href="/">
-              <a>
-                <CircleImage
-                  width="7rem"
-                  height="7rem"
-                  src="/images/profile.jpg"
-                  alt={name}
-                />
-              </a>
+              <HeadingLink>{name}</HeadingLink>
             </Link>
-            <HeadingMd>
-              <Link href="/">
-                <HeadingLink>{name}</HeadingLink>
-              </Link>
-            </HeadingMd>
-          </>
-        )}
+          </HeadingMd>
+        </>
       </HeaderContainer>
       <main>{children}</main>
-      {!home && (
+      {/* {!home && (
         <BackToHomeContainer>
           <Link href="/">
             <Anchor>← Back to home</Anchor>
           </Link>
         </BackToHomeContainer>
-      )}
+      )} */}
     </Container>
   );
 }
