@@ -14,7 +14,6 @@ import { initializeApollo } from 'lib/apolloClient';
 import { gql } from '@apollo/client';
 
 export default function Home({ allPostData }) {
-  console.log(allPostData);
   return (
     <>
       <Head>
